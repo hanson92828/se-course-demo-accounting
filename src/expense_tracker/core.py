@@ -1,10 +1,15 @@
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Protocol
 
 class ExpenseError(Exception): 
     pass
 class InvalidAmountError(ExpenseError): 
     pass
+
+class StorageProtocol(Protocol):
+    def load_all(self) -> list["Expense"]: ...
+    def save_all(self, expenses: list["Expense"]) -> None: ...
 
 @dataclass
 class Expense:
@@ -15,7 +20,7 @@ class Expense:
     date: str = datetime.now().strftime("%Y-%m-%d")
     
 class ExpenseService:
-    def __init__(self, storage):
+    def __init__(self, storage: StorageProtocol):
         self.storage = storage
 
     def add_expense(self, amount: float, category: str, description: str) -> Expense:
@@ -37,4 +42,5 @@ class ExpenseService:
 
     def get_total_by_category(self, category: str) -> float:
         expenses = self.storage.load_all()
-        return sum(e.amount for e in expenses if e.category == category)
+        total = sum((e.amount for e in expenses if e.category == category), 0.0)
+        return float(total)
