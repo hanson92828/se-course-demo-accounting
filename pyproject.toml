@@ -1,5 +1,7 @@
 [tool.ruff]
 line-length = 88
+
+[tool.ruff.lint]
 select = ["E", "F", "B"] # 檢查語法錯誤 (E/F) 與 常見 Bug (B)
 
 [tool.mypy]

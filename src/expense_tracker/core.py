@@ -1,8 +1,10 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-class ExpenseError(Exception): pass
-class InvalidAmountError(ExpenseError): pass
+class ExpenseError(Exception): 
+    pass
+class InvalidAmountError(ExpenseError): 
+    pass
 
 @dataclass
 class Expense:
@@ -23,7 +25,12 @@ class ExpenseService:
         expenses = self.storage.load_all()
         new_id = max([e.id for e in expenses], default=0) + 1
         
-        new_expense = Expense(id=new_id, amount=amount, category=category, description=description)
+        new_expense = Expense(
+            id=new_id, 
+            amount=amount,
+            category=category, 
+            description=description
+        )
         expenses.append(new_expense)
         self.storage.save_all(expenses)
         return new_expense
