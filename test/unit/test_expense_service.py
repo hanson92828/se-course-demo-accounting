@@ -1,5 +1,5 @@
 import pytest
-from src.expense_tracker.core import ExpenseService, InvalidAmountError
+from expense_tracker.core import ExpenseService, InvalidAmountError
 
 # 建立一個假的 Storage 類別來模擬檔案讀寫
 class EmptyStorage:

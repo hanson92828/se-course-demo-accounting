@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.9'
           
       - name: Install Dependencies
         run: |
@@ -30,7 +30,7 @@ jobs:
         run: mypy src/
         
       - name: Run Unit Tests
-        run: pytest test/unit/ --cov=src/  # 跑測試並產出覆蓋率報告
+        run: pytest test/unit/ --cov=src/expense_tracker  # 跑測試並產出覆蓋率報告
 
   # --- 第二階段：CD (部署) ---
   # 只有在 main 分支的推送且 quality-check 通過後才會執行
